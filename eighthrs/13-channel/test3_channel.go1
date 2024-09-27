@@ -1,0 +1,30 @@
+package main
+
+import "fmt"
+
+func main() {
+	c := make(chan int)
+
+	go func() {
+		for i := 0; i < 5; i++ {
+			c <- i
+			close(c)
+		}
+		//close(c)
+	}()
+
+	for {
+		//ok为true
+		if data, ok := <-c; ok  {
+			fmt.Println(data)
+		} else {
+			break
+		}
+	}
+
+	fmt.Println("Main Finished..")
+
+}
+/*
+在循环里close(chan)，主goroutine接收到0以后就结束，子goroutine报写入已关闭channel的异常
+*/

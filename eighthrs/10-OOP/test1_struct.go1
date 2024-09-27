@@ -1,0 +1,36 @@
+package main
+
+import "fmt"
+
+type myint int
+
+type Book struct {
+	title string
+	auth string
+}
+
+func changeBook(book Book) {
+	//传递一个book的副本
+	book.auth = "666"
+}
+
+func changeBook2(book *Book) {
+	//传递一个book的副本
+	book.auth = "777"
+}
+
+func main() {
+	var book1 Book
+	book1.title = "Golang"
+	book1.auth = "zhang3"
+
+	fmt.Print("%v\n", book1)
+
+	changeBook(book1)
+
+	fmt.Print("%v\n", book1)
+
+	changeBook2(&book1)
+
+	fmt.Print("%v\n", book1)
+}

@@ -1,0 +1,25 @@
+package main
+
+import "fmt"
+
+func main() {
+	//隐式申明切片，初始化
+	//slice1 := []int{1,2,3}
+
+	//显式声明切片，未初始化
+	var slice1 []int
+
+	//显式申明切片，分配3个空间，初始化值默认是0
+	//var slice1 []int = make([]int, 3)
+
+	//隐式申明切片，分配3个空间，初始化值默认是0
+	//slice1 := make([]int, 3)
+
+	fmt.Printf("len = %d, type = %T\n", len(slice1), slice1)
+
+	if slice1 == nil {
+		fmt.Println("slice1 是一个空切片")
+	} else {
+		fmt.Println("slice1 是有空间的")
+	}
+}

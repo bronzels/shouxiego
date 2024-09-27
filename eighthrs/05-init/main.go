@@ -1,4 +1,4 @@
-package lib1
+package main
 
 import (
 	lib1 "shouxiego/eighthrs/05-init/lib1"

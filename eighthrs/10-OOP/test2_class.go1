@@ -1,0 +1,52 @@
+package main
+
+import "fmt"
+
+//如果类名函数名大写，表示其他包也能够访问
+type Hero struct {
+	//累的属性首字母大写表示外部可以访问
+	Name string
+	Ad int
+	level int
+}
+
+/*
+func (this Hero) Show() {
+	fmt.Println("Name = ", this.Name)
+	fmt.Println("Ad = ", this.Ad)
+	fmt.Println("level = ", this.level)
+}
+
+func (this Hero) GetName() string {
+	return this.Name
+}
+
+func (this Hero) SetName(newname string) {
+	this.Name = newname
+}
+//不要用this，是调用改方法的对象的一个副本copy
+*/
+
+func (this *Hero) Show() {
+	fmt.Println("Name = ", this.Name)
+	fmt.Println("Ad = ", this.Ad)
+	fmt.Println("level = ", this.level)
+}
+
+func (this *Hero) GetName() string {
+	return this.Name
+}
+
+func (this *Hero) SetName(newname string) {
+	this.Name = newname
+}
+
+func main() {
+	hero := Hero{Name: "zhang3", Ad: 100}
+
+	hero.Show()
+
+	hero.SetName("li4")
+
+	hero.Show()
+}

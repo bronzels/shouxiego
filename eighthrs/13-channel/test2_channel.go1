@@ -1,0 +1,37 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	c := make(chan int, 3)
+
+	fmt.Println("len(c) = ", len(c), ", cap(c) = ", cap(c))
+	
+	go func() {
+		defer fmt.Println("子goroutine结束")
+
+		for i := 0; i < 4; i++ {
+			c <-i
+			fmt.Println("子goroutine正在运行，发送的元素=", i, " len(c)=", len(c), " cap(c)=", cap(c))
+		}
+	}()
+
+	time.Sleep(2 * time.Second)
+
+	for i := 0; i < 4; i++ {
+		num := <-c
+		fmt.Println("num = ", num)
+	}
+
+	//time.Sleep(2 * time.Second)
+	/*
+	这里不加sleep，最后一个元素因为超出capacity阻塞发不过去，
+	主goroutine收到以后立刻结束，整个程序结束，最后一个元素子goroutine发送没有打印
+	加上sleep以后，子goroutine重新得到运行，有完整打印
+	*/
+
+	fmt.Println("main 结束")
+}
